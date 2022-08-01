@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="./images/favicon-32x32.png" />
+    <title>job listing filter</title>
+  </head>
+  <body>
+    <div class="bg">
+      <button class="filter-btn">Filter</button>
+    </div>
+
+    <!-- ===============filter container=========== -->
+    <header class="search-container">
+      <button class="close-btn">x</button>
+      <div class="filter-container">
+        <div class="small-filter" id="level-container">
+          <h2>level</h2>
+          <div class="small-filter-btns">
+            <button class="btn" data-id="senior">senior</button>
+            <button class="btn" data-id="medium">medium</button>
+          </div>
+        </div>
+        <div class="small-filter" id="role-container">
+          <h2>role</h2>
+          <div class="small-filter-btns">
+            <button class="btn" data-id="senior">senior</button>
+            <button class="btn" data-id="medium">medium</button>
+          </div>
+        </div>
+        <div class="small-filter" id="contract-container">
+          <h2>contract</h2>
+          <div class="samll-filter-btns">
+            <button class="btn" data-id="senior">senior</button>
+            <button class="btn" data-id="medium">medium</button>
+          </div>
+        </div>
+        <!-- =================language filter==== -->
+        <div class="big-filter" id="language-container">
+          <h2>language</h2>
+          <div class="big-filter-btns">
+            <button class="btn" data-id="senior">senior</button>
+            <button class="btn" data-id="medium">medium</button>
+            <button class="btn" data-id="medium">medium</button>
+            <button class="btn" data-id="medium">medium</button>
+            <button class="btn" data-id="medium">medium</button>
+            <button class="btn" data-id="medium">medium</button>
+          </div>
+        </div>
+        <div class="big-filter" id="tools-container">
+          <h2>tools</h2>
+          <div class="big-filter-btns">
+            <button class="btn" data-id="senior">senior</button>
+            <button class="btn" data-id="medium">medium</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <!-- ===================main profile============= -->
+      <div class="linked-in">
+        <span class="green-line"></span>
+        <img src="./images/photosnap.svg" alt="" />
+        <div class="profile-container">
+          <div class="profile-info">
+            <p class="company">photosnap</p>
+            <p class="new">new</p>
+            <p class="featured">featured</p>
+          </div>
+          <!-- ===========position=========== -->
+          <h2 class="position">senior frontend developer</h2>
+
+          <!-- =========time-info========= -->
+          <div class="time-info">
+            <p class="posted-at">1d ago</p>
+            <span class="point"></span>
+            <p class="contract">full time</p>
+            <span class="point"></span>
+            <p class="location">usa only</p>
+          </div>
+          <span class="grey-line"></span>
+        </div>
+        <div class="qualities">
+          <p class="quality">frontend</p>
+          <p class="quality">senior</p>
+          <p class="quality">html</p>
+          <p class="quality">css</p>
+          <p class="quality">react</p>
+        </div>
+      </div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
