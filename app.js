@@ -258,10 +258,65 @@ function displaytoolBtns() {
   }
   toolsContainer.innerHTML = btnsList;
 }
+
+// ==================filter-btn/close-btn function==========
+const searchContainer = document.querySelector(".search-container");
+const closeBtn = document.querySelector(".close-btn");
+const filterBtn = document.querySelector(".filter-btn");
+
+filterBtn.addEventListener("click", function () {
+  searchContainer.classList.add("show-container");
+});
+closeBtn.addEventListener("click", function () {
+  searchContainer.classList.remove("show-container");
+});
+
 window.addEventListener("DOMContentLoaded", function () {
   displaylevelBtn();
   displaycontractBtn();
   displayroleBtn();
   displayLanguageBtns();
   displaytoolBtns();
+  displayAll();
 });
+
+// ============= display all items =====================
+const mainContainer = document.querySelector(".main-container");
+
+function displayAll() {
+  listItems = "";
+
+  for (let i = 0; i < dataArr.length; i++) {
+    let item = dataArr[i];
+
+    listItems += `<div class="linked-in">
+  <span class="green-line"></span>
+  <img src=${item.logo} alt="" />
+  <div class="profile-container">
+    <div class="profile-info">
+      <p class="company">${item.company}</p>
+      
+    </div>
+
+    <h2 class="position">${item.position}</h2>
+
+    
+    <div class="time-info">
+      <p class="posted-at">${item.postedAt} ago</p>
+      <span class="point"></span>
+      <p class="contract">${item.contract}</p>
+      <span class="point"></span>
+      <p class="location">${item.location}</p>
+    </div>
+    <span class="grey-line"></span>
+  </div>
+  <div class="qualities">
+  <p class="quality">${item.role}</p>
+  <p class="quality">${item.level}</p>
+  
+    
+  </div>
+</div>`;
+  }
+  mainContainer.innerHTML = listItems;
+}

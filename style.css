@@ -39,7 +39,7 @@ body {
   position: absolute;
   width: 100vw;
   height: 100px;
-  /* display: none; */
+  display: none;
   background-color: var();
   font-family: var(--fontfam);
   font-size: 500;
@@ -143,6 +143,7 @@ body {
   border-radius: 5px;
   box-shadow: 0px 5px 0px var(--LightGrayishCyanFilterTablets);
   font-family: var(--fontfam);
+  margin-bottom: 40px;
 }
 
 .profile-container {
@@ -330,4 +331,9 @@ body {
 .filter-btn:hover {
   background-color: white;
   color: var(--DesaturatedDarkCyan);
+}
+
+/* ======================js class======= */
+.show-container {
+  display: block;
 }
