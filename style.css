@@ -337,3 +337,8 @@ body {
 .show-container {
   display: block;
 }
+
+.selected {
+  background-color: var(--VeryDarkGrayishCyan);
+  color: var(--LightGrayishCyanBackground);
+}

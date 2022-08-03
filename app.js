@@ -257,6 +257,55 @@ function displaytoolBtns() {
     btnsList += `<button class="btn" data-id=${toolsBtns[i]}>${toolsBtns[i]}</button>`;
   }
   toolsContainer.innerHTML = btnsList;
+
+  // ================filter btns function=====================================
+  const filterBtns = document.querySelectorAll(".btn");
+  let filterArr = [];
+
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      let intersection = [];
+      let id = btn.dataset.id;
+      if (btn.classList.contains("selected")) {
+        btn.classList.remove("selected");
+        const index = filterArr.findIndex((Element) => Element === id);
+
+        if (index !== -1) {
+          filterArr.splice(index, 1);
+          console.log(filterArr);
+        }
+      } else {
+        btn.classList.add("selected");
+        filterArr.push(id);
+        console.log(filterArr);
+      }
+      for (let i = 0; i < dataArr.length; i++) {
+        for (let e = 0; e < filterArr.length; e++) {
+          let item = dataArr[i];
+          // =============push the items that matches the filterarr into intersection array and display intersection
+
+          if (
+            item.tools.includes(filterArr[e]) ||
+            item.languages.includes(filterArr[e]) ||
+            item.role === filterArr[e] ||
+            item.level === filterArr[e] ||
+            item.contract === filterArr[e]
+          ) {
+            if (!intersection.includes(item)) intersection.push(item);
+            displayAll(intersection);
+            console.log(intersection);
+          } else {
+            displayAll(intersection);
+          }
+        }
+      }
+      if (intersection.length === 0) {
+        displayAll(dataArr);
+      } else {
+        displayAll(intersection);
+      }
+    });
+  });
 }
 
 // ==================filter-btn/close-btn function==========
@@ -277,32 +326,35 @@ window.addEventListener("DOMContentLoaded", function () {
   displayroleBtn();
   displayLanguageBtns();
   displaytoolBtns();
-  displayAll();
+  displayAll(dataArr);
 });
 
 // ============= display all items =====================
 const mainContainer = document.querySelector(".main-container");
 
-function displayAll() {
+function displayAll(arr) {
   listItems = "";
-
-  for (let i = 0; i < dataArr.length; i++) {
-    let item = dataArr[i];
-
-    listItems += `<div class="linked-in">
+  featuredItems = "";
+  newItems = "";
+  for (let i = 0; i < arr.length; i++) {
+    let item = arr[i];
+    // ========if it is a new and featured=====
+    if (item.new === true && item.featured === true) {
+      featuredItems += `<div class="linked-in">
   <span class="green-line"></span>
   <img src=${item.logo} alt="" />
   <div class="profile-container">
     <div class="profile-info">
       <p class="company">${item.company}</p>
-      
+       <p class="new">new!</p>
+            <p class="featured">featured</p> 
     </div>
 
     <h2 class="position">${item.position}</h2>
 
     
     <div class="time-info">
-      <p class="posted-at">${item.postedAt} ago</p>
+      <p class="posted-at">${item.postedAt} </p>
       <span class="point"></span>
       <p class="contract">${item.contract}</p>
       <span class="point"></span>
@@ -310,13 +362,98 @@ function displayAll() {
     </div>
     <span class="grey-line"></span>
   </div>
-  <div class="qualities">
+  <div class="qualities" id=${i}>
   <p class="quality">${item.role}</p>
   <p class="quality">${item.level}</p>
+
   
     
   </div>
 </div>`;
+      // ==========if it is only new=======
+    } else if (item.new === true) {
+      newItems += ` <div class="linked-in">
+  
+  <img src=${item.logo} alt="" />
+  <div class="profile-container">
+    <div class="profile-info">
+      <p class="company">${item.company}</p>
+       <p class="new">new!</p>
+            
+    </div>
+
+    <h2 class="position">${item.position}</h2>
+
+    
+    <div class="time-info">
+      <p class="posted-at">${item.postedAt}</p>
+      <span class="point"></span>
+      <p class="contract">${item.contract}</p>
+      <span class="point"></span>
+      <p class="location">${item.location}</p>
+    </div>
+    <span class="grey-line"></span>
+  </div>
+  <div class="qualities" id=${i}>
+  <p class="quality">${item.role}</p>
+  <p class="quality">${item.level}</p>
+
+  
+    
+  </div>
+</div>`;
+      // ============else ===============
+    } else {
+      listItems += ` <div class="linked-in">
+
+  <img src=${item.logo} alt="" />
+  <div class="profile-container">
+    <div class="profile-info">
+      <p class="company">${item.company}</p>
+       
+            
+    </div>
+
+    <h2 class="position">${item.position}</h2>
+
+    
+    <div class="time-info">
+      <p class="posted-at">${item.postedAt}</p>
+      <span class="point"></span>
+      <p class="contract">${item.contract}</p>
+      <span class="point"></span>
+      <p class="location">${item.location}</p>
+    </div>
+    <span class="grey-line"></span>
+  </div>
+  <div class="qualities" id=${i}>
+  <p class="quality">${item.role}</p>
+  <p class="quality">${item.level}</p>
+
+  
+    
+  </div>
+</div>`;
+    }
   }
-  mainContainer.innerHTML = listItems;
+  mainContainer.innerHTML = `${featuredItems}${newItems}${listItems}`;
+
+  // =========iterate over the languages array======
+  const qualities = document.querySelectorAll(".qualities");
+  qualities.forEach(function (quality) {
+    // ======iterate over the container by using the id======
+    let qualityContainer = document.getElementById(quality.id);
+    for (let i = 0; i < arr[quality.id].languages.length; i++) {
+      let item = arr[quality.id];
+      qualityContainer.innerHTML += `
+       <p class="quality" >${item.languages[i]}</p>`;
+    }
+
+    // ===========iterate over the tools arrays=======
+    for (let i = 0; i < arr[quality.id].tools.length; i++) {
+      let item = arr[quality.id];
+      qualityContainer.innerHTML += `
+       <p class="quality" >${item.tools[i]}</p>`;
+    }
+  });
 }
